@@ -1,9 +1,21 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
-import App from './App';
+
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+import './sass/main.scss';
+
+import Header from './components/Header';
+
+import HomePage from './pages/HomePage';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <Header />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>,
 );
