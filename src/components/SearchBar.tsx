@@ -17,8 +17,8 @@ function SearchBar() {
   };
 
   return (
-    <form onSubmit={submitSearch} role="search" noValidate>
-      <label htmlFor="search__input">
+    <form className="search" onSubmit={submitSearch} role="search" noValidate>
+      <label htmlFor="search__input" className="search__input--wrapper">
         <span className="search__label">Search for a movie</span>
         <input
           id="search__input"

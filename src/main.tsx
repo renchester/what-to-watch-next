@@ -5,19 +5,24 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import './sass/main.scss';
 
-import Header from './components/Header';
-import Footer from './components/Footer';
-
+import App from './App';
 import HomePage from './pages/HomePage';
+import SearchPage from './pages/SearchPage';
+
+import EmptySearch from './components/EmptySearch';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <BrowserRouter>
-      <Header />
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<App />}>
+          <Route index element={<HomePage />} />
+          <Route path="search" element={<SearchPage />}>
+            <Route index element={<EmptySearch />} />
+            <Route path=":query" element={<EmptySearch />} />
+          </Route>
+        </Route>
       </Routes>
-      <Footer />
     </BrowserRouter>
   </React.StrictMode>,
 );
