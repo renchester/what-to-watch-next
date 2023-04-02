@@ -32,7 +32,11 @@ function SearchBar() {
           required
         />
         {isError && (
-          <p className="search__error-message" role="alert">
+          <p
+            className="search__error-message"
+            role="alert"
+            aria-label="search input error"
+          >
             You need to enter a search term before pressing submit.
           </p>
         )}

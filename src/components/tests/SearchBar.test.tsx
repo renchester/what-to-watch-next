@@ -80,7 +80,9 @@ describe('The search bar', () => {
     await user.type(searchBar, 'hello');
     await user.click(button);
 
-    expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole('alert', { name: 'search input error' }),
+    ).not.toBeInTheDocument();
     expect(screen.getByRole('search')).toHaveFormValues({
       search: 'hello',
     });
