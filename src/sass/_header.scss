@@ -1,0 +1,13 @@
+@import 'mixins';
+
+.header {
+  @extend %parent-with-centered-children;
+
+  background: var(--color-primary);
+  padding-block: 30px;
+
+  &__logo {
+    text-decoration: none;
+    color: var(--color-light-1);
+  }
+}
