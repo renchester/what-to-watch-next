@@ -1,28 +1,49 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import {
+  Route,
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider,
+} from 'react-router-dom';
 
 import './sass/main.scss';
 
 import App from './App';
 import HomePage from './pages/HomePage';
 import SearchPage from './pages/SearchPage';
+import MoviePage from './pages/MoviePage';
 
 import EmptySearch from './components/EmptySearch';
+import SearchResults, { searchLoader } from './components/SearchResults';
+import MovieDetails, { movieDetailsLoader } from './components/MovieDetails';
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<App />}>
+      <Route index element={<HomePage />} />
+      <Route path="search" element={<SearchPage />}>
+        <Route index element={<EmptySearch />} />
+        <Route
+          path=":query"
+          loader={searchLoader}
+          element={<SearchResults />}
+        />
+      </Route>
+      <Route path="movie" element={<MoviePage />}>
+        <Route
+          path=":movieId"
+          loader={movieDetailsLoader}
+          element={<MovieDetails />}
+        />
+      </Route>
+    </Route>,
+  ),
+);
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />}>
-          <Route index element={<HomePage />} />
-          <Route path="search" element={<SearchPage />}>
-            <Route index element={<EmptySearch />} />
-            <Route path=":query" element={<EmptySearch />} />
-          </Route>
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <RouterProvider router={router} />
   </React.StrictMode>,
 );
