@@ -1,11 +1,13 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function SearchBar() {
+  const navigate = useNavigate();
   const [query, setQuery] = useState('');
   const [isError, setIsError] = useState(false);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setQuery(() => e.target.value);
+    setQuery(e.target.value);
   };
 
   const submitSearch = (e: React.FormEvent<HTMLFormElement>): void => {
@@ -13,7 +15,9 @@ function SearchBar() {
 
     setIsError(query.length < 1);
 
-    const data = new FormData(e.currentTarget);
+    const newQuery = new FormData(e.currentTarget).get('search') as string;
+
+    navigate(`/search/${newQuery.trim()}`);
   };
 
   return (
