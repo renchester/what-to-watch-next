@@ -2,9 +2,9 @@ import { Outlet } from 'react-router-dom';
 
 function SearchPage() {
   return (
-    <div>
+    <main className="search-page">
       <Outlet />
-    </div>
+    </main>
   );
 }
 export default SearchPage;

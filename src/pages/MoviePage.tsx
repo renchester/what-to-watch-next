@@ -1,6 +1,10 @@
-import { useParams } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
 function MoviePage() {
-  return <div>MoviePage</div>;
+  return (
+    <main className="mv-page">
+      <Outlet />
+    </main>
+  );
 }
 export default MoviePage;
