@@ -9,6 +9,12 @@ function Header() {
         <h2>A spanner in the works</h2>
       </Link>
       <SearchBar />
+      <Link to="/watchlist" className="header__watchlist">
+        <span className="material-symbols-outlined" aria-hidden="true">
+          theaters
+        </span>
+        <span className="header__watchlist-text">Your watchlist</span>
+      </Link>
     </header>
   );
 }
