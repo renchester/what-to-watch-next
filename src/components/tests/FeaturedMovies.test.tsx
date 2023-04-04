@@ -9,28 +9,62 @@ vi.mock('axios');
 const mockedAxios = axios as Mocked<typeof axios>;
 
 describe('The <FeaturedMovies> component', () => {
-  it('renders correct header based on category - popular', () => {
+  it('renders correct header based on category - popular', async () => {
+    const fakeMovies = [
+      {
+        title: 'Fake Movie 1',
+        overview: 'Fake Overview 1',
+        release_date: '2010-11-10',
+      },
+    ];
+
+    mockedAxios.get.mockResolvedValue({
+      status: 200,
+      data: {
+        results: fakeMovies,
+      },
+    });
+
     render(
       <BrowserRouter>
         <FeaturedMovies category="popular" />
       </BrowserRouter>,
     );
 
-    expect(
-      screen.getByRole('heading', { name: /popular/i }),
-    ).toBeInTheDocument();
+    await waitFor(() => {
+      expect(
+        screen.getByRole('heading', { name: /popular/i }),
+      ).toBeInTheDocument();
+    });
   });
 
-  it('renders correct header based on category - upcoming', () => {
+  it('renders correct header based on category - upcoming', async () => {
+    const fakeMovies = [
+      {
+        title: 'Fake Movie 1',
+        overview: 'Fake Overview 1',
+        release_date: '2010-11-10',
+      },
+    ];
+
+    mockedAxios.get.mockResolvedValue({
+      status: 200,
+      data: {
+        results: fakeMovies,
+      },
+    });
+
     render(
       <BrowserRouter>
         <FeaturedMovies category="upcoming" />
       </BrowserRouter>,
     );
 
-    expect(
-      screen.getByRole('heading', { name: /coming soon/i }),
-    ).toBeInTheDocument();
+    await waitFor(() => {
+      expect(
+        screen.getByRole('heading', { name: /coming soon/i }),
+      ).toBeInTheDocument();
+    });
   });
 
   it('renders movies when API call succeeds', async () => {
@@ -90,6 +124,8 @@ describe('The <FeaturedMovies> component', () => {
       expect(
         screen.getByRole('alert', { name: 'movie data error' }),
       ).toBeInTheDocument();
+
+      expect(screen.getByText(/unable to fetch data/i)).toBeInTheDocument();
     });
   });
 });

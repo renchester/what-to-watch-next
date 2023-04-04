@@ -33,14 +33,20 @@ function FeaturedMovies(props: { category: MovieCategory }) {
 
   const [categoryInfo, setCategoryInfo] = useState<CategoryInfo>();
   const [movies, setMovies] = useState<Movie[]>([]);
+  const [isError, setError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
 
   useEffect(() => {
     setCategoryInfo(categories.find((ctg) => ctg.type === category));
 
     fetchMovies(category)
       .then((data) => setMovies(data))
-      // eslint-disable-next-line no-console
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        if (err instanceof Error) {
+          setError(true);
+          setErrorMsg(err.message);
+        }
+      });
   }, []);
 
   return (
@@ -51,15 +57,16 @@ function FeaturedMovies(props: { category: MovieCategory }) {
       <p className="rec-mv__subtitle"> {categoryInfo?.subtitle}</p>
 
       <section className="rec-mv__movie-container">
-        {movies.length >= 1 ? (
-          movies?.map((mv) => <MovieCard movie={mv} key={nanoid()} />)
-        ) : (
+        {movies.length >= 1 &&
+          movies?.map((mv) => <MovieCard movie={mv} key={nanoid()} />)}
+
+        {isError && (
           <p
             className="rec-mv__error"
             role="alert"
             aria-label="movie data error"
           >
-            Something went wrong...
+            Something went wrong... {errorMsg}
           </p>
         )}
       </section>
