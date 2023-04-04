@@ -24,7 +24,7 @@ export type MovieDetailsType = {
   budget?: number;
   genres?: { id: number; name: string }[];
   homepage?: string | null;
-  id?: number;
+  id: number;
   imdb_id?: string | null;
   original_language?: string;
   original_title?: string;
@@ -103,3 +103,5 @@ export type LogoSizes =
   | 'original';
 
 export type ProfileSizes = 'w45' | 'w185' | 'h632' | 'original';
+
+export type Watchlist = number[];
