@@ -17,7 +17,8 @@ import MoviePage from './pages/MoviePage';
 
 import EmptySearch from './components/EmptySearch';
 import SearchResults, { searchLoader } from './components/SearchResults';
-import MovieDetails, { movieDetailsLoader } from './components/MovieDetails';
+import MovieInfo, { movieInfoLoader } from './components/MovieInfo';
+import WatchlistPage from './pages/WatchlistPage';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -34,10 +35,11 @@ const router = createBrowserRouter(
       <Route path="movie" element={<MoviePage />}>
         <Route
           path=":movieId"
-          loader={movieDetailsLoader}
-          element={<MovieDetails />}
+          loader={movieInfoLoader}
+          element={<MovieInfo />}
         />
       </Route>
+      <Route path="watchlist" element={<WatchlistPage />}></Route>
     </Route>,
   ),
 );
