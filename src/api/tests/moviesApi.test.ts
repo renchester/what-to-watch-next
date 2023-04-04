@@ -1,35 +1,31 @@
-import { it, expect, vi, afterEach } from 'vitest';
+import { it, expect, vi, afterEach, Mocked } from 'vitest';
 
 import axios from 'axios';
-import { fetchMovies } from '../moviesApi';
+import {
+  fetchMovies,
+  fetchMovieQueryResults,
+  fetchMovieDetails,
+  fetchMovieCast,
+  fetchMovieRecommendations,
+} from '../moviesApi';
 import { Movie } from '../../types/types';
 
 vi.mock('axios');
+const mockedAxios = axios as Mocked<typeof axios>;
+
 describe('Fetching movies', () => {
   afterEach(() => {
     vi.restoreAllMocks();
   });
 
   beforeEach(() => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-    axios.get.mockResolvedValue({
+    mockedAxios.get.mockResolvedValue({
       status: 200,
       data: {
         results: [
           {
-            poster_path: '/1BdD1kMK1phbANQHmddADzoeKgr.jpg',
-            adult: false,
-            overview: 'Lorem ipsum',
-            release_date: '2016-09-08',
-            genre_ids: [36, 18],
             id: 363676,
-            original_title: 'Sully',
-            original_language: 'en',
             title: 'Sully',
-            backdrop_path: '/nfj8iBvOjlb7ArbThO764HCQw5H.jpg',
-            popularity: 3.254896,
-            vote_count: 8,
-            video: false,
             vote_average: 4.88,
           },
         ],
@@ -52,5 +48,124 @@ describe('Fetching movies', () => {
 
     expect(mockFetch).toHaveBeenCalledTimes(1);
     expect(mockFetch).toHaveBeenCalledWith('popular');
+  });
+});
+
+describe('Fetching movie search results', () => {
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  beforeEach(() => {
+    mockedAxios.get.mockResolvedValue({
+      status: 200,
+      data: {
+        results: [
+          {
+            overview: 'Lorem ipsum',
+            id: 363676,
+            title: 'Fake result 1',
+            vote_average: 4.88,
+          },
+          {
+            overview: 'Lorem ipsum',
+            id: 363676,
+            title: 'Fake result 2',
+            vote_average: 4.88,
+          },
+        ],
+      },
+    });
+  });
+
+  it('returns the correct amount of search results', async () => {
+    const mockFetch = vi.fn().mockImplementation(fetchMovieQueryResults);
+
+    const movies = (await mockFetch('fake')) as Movie[];
+
+    expect(movies).toHaveLength(2);
+    expect(movies[0].title).toMatch(/fake/i);
+  });
+
+  it('gets called with the right parameter', async () => {
+    const mockFetch = vi.fn().mockImplementation(fetchMovieQueryResults);
+
+    await mockFetch('fake');
+
+    expect(mockFetch).toHaveBeenCalledTimes(1);
+    expect(mockFetch).toHaveBeenCalledWith('fake');
+  });
+});
+
+describe('Error handling', () => {
+  beforeEach(() =>
+    mockedAxios.get.mockResolvedValue({
+      status: 404,
+    }),
+  );
+
+  it('returns correct error message for fetching movies', async () => {
+    let target;
+
+    try {
+      target = await fetchMovies('popular');
+    } catch (err) {
+      if (err instanceof Error)
+        expect(err.message).toMatch(/unable to fetch data/i);
+    }
+
+    expect(target).toBeUndefined();
+  });
+
+  it('returns correct error message for fetching movie search results', async () => {
+    let target;
+
+    try {
+      target = await fetchMovieQueryResults('mock');
+    } catch (err) {
+      if (err instanceof Error)
+        expect(err.message).toMatch(/unable to fetch search results/i);
+    }
+
+    expect(target).toBeUndefined();
+  });
+
+  it('returns correct error message for fetching movie details', async () => {
+    let target;
+
+    try {
+      target = await fetchMovieDetails('123');
+    } catch (err) {
+      if (err instanceof Error)
+        expect(err.message).toMatch(/unable to fetch movie details/i);
+    }
+
+    expect(target).toBeUndefined();
+  });
+
+  it('returns correct error message for fetching movie recommendations', async () => {
+    let target;
+
+    try {
+      target = await fetchMovieRecommendations('123');
+    } catch (err) {
+      if (err instanceof Error)
+        expect(err.message).toMatch(/unable to fetch movie recommendations/i);
+    }
+
+    expect(target).toBeUndefined();
+  });
+
+  it('returns correct error message for fetching movie cast', async () => {
+    let target;
+
+    try {
+      target = await fetchMovieCast('123');
+    } catch (err) {
+      if (err instanceof Error)
+        expect(err.message).toMatch(/unable to fetch movie credits/i);
+    }
+
+    expect(target).toBeUndefined();
   });
 });
