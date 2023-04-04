@@ -1,6 +1,8 @@
+import { useEffect, useState } from 'react';
 import getYear from 'date-fns/getYear';
 
 import { MovieDetailsType, BackdropSizes } from '../types/types';
+import { useWatchlist } from '../context/WatchlistContext';
 
 type MovieDetailsSectionProps = {
   movie: MovieDetailsType;
@@ -8,9 +10,31 @@ type MovieDetailsSectionProps = {
 
 function MovieDetailsSection(props: MovieDetailsSectionProps) {
   const { movie } = props;
+  const [inWatchlist, setInWatchlist] = useState(false);
+  const { watchlistState, dispatch } = useWatchlist();
 
   const IMG_URL = import.meta.env.VITE_TMDB_IMG_URL;
   const IMG_SIZE_IDENTIFIER: BackdropSizes = 'w1280';
+
+  useEffect(() => {
+    if (watchlistState.find((wlMovieId) => wlMovieId === movie.id))
+      setInWatchlist(true);
+  }, []);
+
+  const addToWatchList = () => {
+    dispatch({
+      type: 'add_to_list',
+      payload: movie.id,
+    });
+
+    setInWatchlist(true);
+  };
+
+  const removeFromWatchList = () => {
+    dispatch({ type: 'remove_from_list', payload: movie.id });
+
+    setInWatchlist(false);
+  };
 
   return (
     <section
@@ -54,8 +78,31 @@ function MovieDetailsSection(props: MovieDetailsSectionProps) {
         <img
           src={`${IMG_URL}/${IMG_SIZE_IDENTIFIER}${movie.backdrop_path}`}
           alt={`Official poster for ${movie.title || 'this movie'}`}
+          className="mv-dtl__img"
         />
       )}
+
+      <div className="mv-dtl__wl-container">
+        {inWatchlist ? (
+          <button
+            type="button"
+            className="mv-dtl__wl-btn remove"
+            onClick={removeFromWatchList}
+          >
+            {' '}
+            Remove from watchlist
+          </button>
+        ) : (
+          <button
+            type="button"
+            className="mv-dtl__wl-btn add"
+            onClick={addToWatchList}
+          >
+            {' '}
+            Add to your watchlist{' '}
+          </button>
+        )}
+      </div>
     </section>
   );
 }
