@@ -38,7 +38,7 @@ function MovieInfo() {
     };
 
   const { movieId } = useParams();
-  const [targetMovie, setTargetMovie] = useState<MovieDetailsType>({});
+  const [targetMovie, setTargetMovie] = useState<MovieDetailsType>({ id: 0 });
 
   useEffect(() => {
     setTargetMovie(() => movieDetails);
