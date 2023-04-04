@@ -76,4 +76,26 @@ describe('The <MovieCard> component', () => {
       screen.queryByAltText(/poster for this movie/i),
     ).not.toBeInTheDocument();
   });
+
+  it('does not render overview when not supplied', () => {
+    render(
+      <BrowserRouter>
+        <MovieCard movie={emptyMovie} />
+      </BrowserRouter>,
+    );
+
+    expect(screen.queryByTestId('mv-card__overview')).not.toBeInTheDocument();
+  });
+
+  it('does not render release year when not supplied', () => {
+    render(
+      <BrowserRouter>
+        <MovieCard movie={emptyMovie} />
+      </BrowserRouter>,
+    );
+
+    expect(
+      screen.queryByRole('heading', { name: 'movie release year' }),
+    ).not.toBeInTheDocument();
+  });
 });

@@ -25,15 +25,20 @@ function MovieCard(props: MovieCardProps) {
         <h3 className="mv-card__title" aria-label="movie title">
           {movie.title}
         </h3>
-        <h4 className="mv-card__year" aria-label="movie release year">
-          {getYear(new Date(movie.release_date || 1))}
-        </h4>
-        <p
-          className="mv-card__overview"
-          aria-label={`Plot overview for ${movie.title || 'this movie'}`}
-        >
-          {movie.overview}
-        </p>
+        {movie.release_date && (
+          <h4 className="mv-card__year" aria-label="movie release year">
+            {getYear(new Date(movie.release_date))}
+          </h4>
+        )}
+        {movie.overview && (
+          <p
+            className="mv-card__overview"
+            aria-label={`Plot overview for ${movie.title || 'this movie'}`}
+            data-testid="mv-card__overview"
+          >
+            {movie.overview}
+          </p>
+        )}
       </article>
     </Link>
   );
