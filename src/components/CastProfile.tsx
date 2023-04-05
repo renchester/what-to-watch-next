@@ -16,7 +16,7 @@ function CastProfile(props: CastProfileProps) {
       {profile.profile_path && (
         <img
           src={`${IMG_URL}/${IMG_SIZE_IDENTIFIER}${profile.profile_path}`}
-          alt={`Profile image for ${profile.name || 'a cast/crew member'}`}
+          alt={`Profile for ${profile.name || 'a cast/crew member'}`}
         />
       )}
 
