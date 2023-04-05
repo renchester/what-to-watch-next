@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function SearchBar() {
@@ -13,12 +13,19 @@ function SearchBar() {
   const submitSearch = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
 
-    setIsError(query.length < 1);
+    const isEmpty = query.length < 1;
+
+    setIsError(isEmpty);
+    if (isEmpty) return;
 
     const newQuery = new FormData(e.currentTarget).get('search') as string;
 
     navigate(`/search/${newQuery.trim()}`);
   };
+
+  useEffect(() => {
+    setTimeout(() => setIsError(false), 5000);
+  }, [isError]);
 
   return (
     <form className="search" onSubmit={submitSearch} role="search" noValidate>
