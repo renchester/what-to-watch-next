@@ -5,6 +5,7 @@ import {
   useLoaderData,
   Await,
   defer,
+  useParams,
 } from 'react-router-dom';
 
 import MovieCard from './MovieCard';
@@ -12,6 +13,7 @@ import Loading from './Loading';
 
 import { fetchMovieQueryResults } from '../api/moviesApi';
 import { Movie } from '../types/types';
+import EmptySearch from './EmptySearch';
 
 export const searchLoader = ({ params }: LoaderFunctionArgs) => {
   const query = params.query as string;
@@ -21,25 +23,35 @@ export const searchLoader = ({ params }: LoaderFunctionArgs) => {
 };
 
 function SearchResults() {
+  const { query } = useParams();
   const { resultsPromise } = useLoaderData() as { resultsPromise: Movie[] };
 
-  return (
-    <section className="results" aria-labelledby="results__title">
-      <h1 className="results__title" id="results__title">
-        Results for ...
+  const renderResults = (searchResults: Movie[]) => (
+    <>
+      <h1 className="search-results__title" id="search-results__title">
+        Results for {query}
       </h1>
+      <div className="search-results__container">
+        {searchResults.map((res) => (
+          <MovieCard movie={res} key={nanoid()} />
+        ))}
+      </div>
+    </>
+  );
 
-      <section className="results-container">
-        <Suspense fallback={<Loading message="Fetching search results..." />}>
-          <Await resolve={resultsPromise}>
-            {(searchResults: Movie[]) =>
-              searchResults.map((res) => (
-                <MovieCard movie={res} key={nanoid()} />
-              ))
-            }
-          </Await>
-        </Suspense>
-      </section>
+  return (
+    <section className="search-results" aria-labelledby="search-results__title">
+      <Suspense fallback={<Loading message="Fetching search results..." />}>
+        <Await resolve={resultsPromise} errorElement={<p>Nothing here</p>}>
+          {(searchResults: Movie[]) => {
+            return searchResults.length >= 1 ? (
+              renderResults(searchResults)
+            ) : (
+              <EmptySearch query={query} />
+            );
+          }}
+        </Await>
+      </Suspense>
     </section>
   );
 }
