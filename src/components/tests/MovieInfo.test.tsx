@@ -10,7 +10,7 @@ import {
 
 import axios from 'axios';
 
-import MovieDetails from '../MovieInfo';
+import MovieInfo from '../MovieInfo';
 import { MovieCredits, MovieDetailsType } from '../../types/types';
 
 vi.mock('axios');
@@ -91,7 +91,7 @@ describe('The <MovieDetails> component', () => {
 
     const testRoute = createBrowserRouter(
       createRoutesFromChildren(
-        <Route path="/123" loader={mockLoader} element={<MovieDetails />} />,
+        <Route path="/123" loader={mockLoader} element={<MovieInfo />} />,
       ),
     );
 
