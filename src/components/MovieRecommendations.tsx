@@ -12,12 +12,18 @@ function MovieRecommendations(props: MovieRecommendationsProps) {
 
   return (
     <section className="mv-rec" aria-labelledby="mv-rec__title">
-      <h2 className="mv-rec__title" id="mv-rec__title">
-        If you liked {origMovieTitle}, you might like these...
-      </h2>
-
-      {recommendations.length >= 1 &&
-        recommendations.map((rec) => <MovieCard movie={rec} key={nanoid()} />)}
+      {recommendations.length >= 1 && (
+        <>
+          <h2 className="mv-rec__title" id="mv-rec__title">
+            If you liked {origMovieTitle}, you might like these...
+          </h2>
+          <div className="mv-rec__recommendations">
+            {recommendations.map((rec) => (
+              <MovieCard movie={rec} key={nanoid()} />
+            ))}
+          </div>
+        </>
+      )}
     </section>
   );
 }
