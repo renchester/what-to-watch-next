@@ -1,7 +1,18 @@
 @use 'base';
 @use 'mixins';
-@use 'footer';
+@use 'imports';
+
 @use 'header';
-@use 'search-bar';
+@use 'footer';
+
+@use 'home-page';
 @use 'featured-movies';
 @use 'movie-card';
+
+@use 'search-results';
+
+@use 'loading';
+
+@use 'movie-credits';
+@use 'cast-profile';
+@use 'movie-details';

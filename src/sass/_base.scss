@@ -71,11 +71,14 @@ ul {
 }
 
 body {
+  --page-width: min(100%, 1600px);
+
   /* COLOR VARIABLES */
 
-  --color-primary: #9443e0;
-  --color-accent-1: #00457e;
-  --color-accent-2: #00268d;
+  --color-primary: #161925;
+  --color-accent-1: #c1292e;
+  --color-accent-2: #235789;
+  --color-accent-3: #f1d302;
 
   --color-background: #f3f3f4;
   --color-background-opacity75: #f3f3f4be;
@@ -114,6 +117,16 @@ body {
   --font-merriweather: 'Merriweather', Times, 'Times New Roman', serif,
     monospace;
   --font-yeseva: 'Yeseva One', Times, 'Times New Roman', serif, monospace;
+
+  --font-comfortaa: 'Comfortaa', Arial, Helvetica, sans-serif, monospace;
+
+  --font-gotham: 'Gotham', Arial, Helvetica, sans-serif, monospace;
+  --font-gotham-bold: 'Gotham Bold', Arial, Helvetica, sans-serif, monospace;
+  --font-gotham-book: 'Gotham Book', Arial, Helvetica, sans-serif, monospace;
+  --font-gotham-black: 'Gotham Black', Arial, Helvetica, sans-serif, monospace;
+  --font-gotham-ultra: 'Gotham Ultra', Arial, Helvetica, sans-serif, monospace;
+  --font-gotham-italic: 'Gotham Italic', Arial, Helvetica, sans-serif, monospace;
+  --font-gotham-thin: 'Gotham Thin', Arial, Helvetica, sans-serif, monospace;
 
   /* FONT SIZE VARIABLES */
 

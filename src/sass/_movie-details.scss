@@ -1,0 +1,13 @@
+@import 'mixins';
+
+.mv-dtl {
+  @include center-self(horizontal);
+  display: flex;
+  flex-direction: column;
+  isolation: isolate;
+  width: var(--page-width);
+
+  &__text-container {
+    padding-top: 50px;
+  }
+}

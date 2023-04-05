@@ -1,0 +1,28 @@
+@import 'mixins';
+
+.cast-prof {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-right: 22px;
+  padding-bottom: 30px;
+
+  &__img {
+    border-radius: 50%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    width: 180px;
+  }
+
+  &__name {
+    margin-top: 5px;
+    font-family: var(--font-gotham-bold);
+    font-size: var(--text-sm);
+    text-align: center;
+  }
+
+  &__character {
+    font-family: var(--font-open-sans);
+    text-align: center;
+  }
+}

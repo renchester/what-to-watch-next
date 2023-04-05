@@ -1,26 +1,27 @@
 @import 'mixins';
 
-.rec-mv {
-  --text-indent: 25px;
-
-  position: relative;
-  margin-block: 70px;
+.mv-credits {
+  @include center-self(horizontal);
+  display: flex;
+  flex-direction: column;
   width: var(--page-width);
 
-  display: grid;
-
-  &__title {
-    padding-left: var(--text-indent);
-    margin-bottom: 5px;
-    font-family: var(--font-gotham);
-    font-size: var(--text-xl);
+  &__crew,
+  &__cast {
+    position: relative;
+    margin-block: 20px;
   }
 
-  &__subtitle {
-    margin-bottom: 30px;
-    padding-left: var(--text-indent);
-    font-family: var(--font-gotham-book);
-    font-style: italic;
+  &__title {
+    text-indent: 15px;
+    text-transform: uppercase;
+    font-family: var(--font-gotham);
+    font-size: var(--text-md);
+    letter-spacing: 1px;
+  }
+
+  &__list {
+    margin-top: 12px;
   }
 
   .flickity {
@@ -56,12 +57,12 @@
 
     &-prev-next-button {
       --margin-inline: 20px;
-      --button-size: 65px;
+      --button-size: 45px;
 
       @include center-self(vertical, absolute);
       width: var(--button-size);
       height: var(--button-size);
-      border-radius: 12px;
+      border-radius: 25px;
       padding: 12px;
 
       &.previous {

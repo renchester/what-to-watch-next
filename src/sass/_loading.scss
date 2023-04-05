@@ -1,3 +1,17 @@
+@import 'mixins';
+
+.loading {
+  @include center-self(horizontal);
+  @extend %parent-with-centered-children;
+  flex-direction: column;
+  gap: 10px;
+  margin-block: 100px;
+
+  &__message {
+    font-size: var(--text-md);
+  }
+}
+
 .lds-ring {
   display: inline-block;
   position: relative;

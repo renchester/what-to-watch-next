@@ -1,0 +1,6 @@
+@import 'mixins';
+
+.home-page {
+  @include center-self(horizontal);
+  width: var(--page-width);
+}
