@@ -44,19 +44,28 @@ function MovieDetailsSection(props: MovieDetailsSectionProps) {
       <h1 className="mv-dtl__title" aria-label="movie title">
         {movie.title}
       </h1>
-      <h2 className="mv-dtl__release-year" aria-label="movie release year">
-        {getYear(new Date(movie.release_date || 1))}
-      </h2>
-      {!!movie.vote_average && (
-        <h2 className="mv-dtl__rating" aria-label="movie rating">
-          {movie.vote_average}/10
+      {movie.release_date && (
+        <h2 className="mv-dtl__release-year" aria-label="movie release year">
+          {getYear(new Date(movie.release_date))}
         </h2>
       )}
 
-      {movie.tagline && (
-        <h3 className="mv-dtl__tagline" aria-label="movie tagline">
-          {movie.tagline}
+      {!!movie.vote_average && (
+        <h3 className="mv-dtl__rating" aria-label="movie rating">
+          {movie.vote_average}/10
         </h3>
+      )}
+
+      {!!movie.runtime && (
+        <h3 className="mv-dtl__runtime" aria-label="movie runtime">
+          {movie.runtime} min
+        </h3>
+      )}
+
+      {movie.tagline && (
+        <h2 className="mv-dtl__tagline" aria-label="movie tagline">
+          {movie.tagline}
+        </h2>
       )}
 
       <p className="mv-dtl__overview" aria-label="movie overview">
@@ -77,7 +86,7 @@ function MovieDetailsSection(props: MovieDetailsSectionProps) {
       {movie.backdrop_path && (
         <img
           src={`${IMG_URL}/${IMG_SIZE_IDENTIFIER}${movie.backdrop_path}`}
-          alt={`Official poster for ${movie.title || 'this movie'}`}
+          alt={`Backdrop image for ${movie.title || 'this movie'}`}
           className="mv-dtl__img"
         />
       )}
