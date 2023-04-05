@@ -1,18 +1,25 @@
 import { Link } from 'react-router-dom';
 import SearchBar from './SearchBar';
+import logo from '../assets/img/popcorn.png';
 
 function Header() {
   return (
     <header className="header">
       <Link to="/" className="header__logo">
-        <h1>What to watch next</h1>
-        <h2>A spanner in the works</h2>
+        <img src={logo} alt="Popcorn logo" className="header__logo-icon" />
+        <h1 className="header__logo-title">What to watch next</h1>
+        <h2 className="header__logo-subtitle">Find your next movie to watch</h2>
       </Link>
+
       <SearchBar />
+
       <Link to="/watchlist" className="header__watchlist">
-        <span className="material-symbols-outlined" aria-hidden="true">
+        <div
+          className="header__watchlist-icon material-symbols-outlined"
+          aria-hidden="true"
+        >
           theaters
-        </span>
+        </div>
         <span className="header__watchlist-text">Your watchlist</span>
       </Link>
     </header>
