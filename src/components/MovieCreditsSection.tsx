@@ -1,4 +1,6 @@
 import { nanoid } from 'nanoid';
+import Flickity from 'react-flickity-component';
+
 import { MovieCredits } from '../types/types';
 import CastProfile from './CastProfile';
 
@@ -16,6 +18,11 @@ function MovieCreditsSection(props: MovieCreditsProps) {
         person.job?.match(/director/i) || person.job?.match(/producer/i),
     ) || [];
 
+  const flickityOptions = {
+    groupCells: '30%',
+    initialIndex: 2,
+  };
+
   return (
     <section className="mv-credits" aria-label="Movie credits">
       {movieCast.length > 0 && (
@@ -27,7 +34,11 @@ function MovieCreditsSection(props: MovieCreditsProps) {
             Cast Members
           </h2>
 
-          <ul className="mv-credits__list">
+          <Flickity
+            className="mv-credits__list"
+            elementType="ul"
+            options={flickityOptions}
+          >
             {movieCast.map((castMember) => (
               <CastProfile
                 type="cast"
@@ -35,7 +46,7 @@ function MovieCreditsSection(props: MovieCreditsProps) {
                 key={castMember.cast_id || nanoid()}
               />
             ))}
-          </ul>
+          </Flickity>
         </article>
       )}
 
@@ -48,7 +59,11 @@ function MovieCreditsSection(props: MovieCreditsProps) {
             Behind the camera
           </h2>
 
-          <ul className="mv-credits__list">
+          <Flickity
+            className="mv-credits__list"
+            elementType="ul"
+            options={flickityOptions}
+          >
             {movieCrew.map((crewMember) => (
               <CastProfile
                 type="crew"
@@ -56,7 +71,7 @@ function MovieCreditsSection(props: MovieCreditsProps) {
                 key={crewMember.credit_id || nanoid()}
               />
             ))}
-          </ul>
+          </Flickity>
         </article>
       )}
     </section>

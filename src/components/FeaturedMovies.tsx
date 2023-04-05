@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { nanoid } from 'nanoid';
+import Flickity from 'react-flickity-component';
 
 import { fetchMovies } from '../api/moviesApi';
 import { Movie, MovieCategory } from '../types/types';
@@ -25,6 +26,7 @@ const categories: CategoryInfo[] = [
   {
     type: 'upcoming',
     title: 'Coming soon to theaters',
+    subtitle: 'Here are some movies to watch for in the coming weeks',
   },
 ];
 
@@ -49,6 +51,12 @@ function FeaturedMovies(props: { category: MovieCategory }) {
       });
   }, []);
 
+  const flickityOptions = {
+    wrapAround: true,
+    initialIndex: 1,
+    groupCells: '70%',
+  };
+
   return (
     <section className="rec-mv" aria-labelledby="rec-mv__title">
       <h1 className="rec-mv__title" id="rec-mv__title">
@@ -56,20 +64,24 @@ function FeaturedMovies(props: { category: MovieCategory }) {
       </h1>
       <p className="rec-mv__subtitle"> {categoryInfo?.subtitle}</p>
 
-      <section className="rec-mv__movie-container">
-        {movies.length >= 1 &&
-          movies?.map((mv) => <MovieCard movie={mv} key={nanoid()} />)}
+      {movies.length >= 1 && (
+        <Flickity
+          elementType="section"
+          className="rec-mv__movie-container"
+          options={flickityOptions}
+          reloadOnUpdate
+        >
+          {movies.map((mv) => (
+            <MovieCard movie={mv} key={nanoid()} />
+          ))}
+        </Flickity>
+      )}
 
-        {isError && (
-          <p
-            className="rec-mv__error"
-            role="alert"
-            aria-label="movie data error"
-          >
-            Something went wrong... {errorMsg}
-          </p>
-        )}
-      </section>
+      {isError && (
+        <p className="rec-mv__error" role="alert" aria-label="movie data error">
+          Something went wrong... {errorMsg}
+        </p>
+      )}
     </section>
   );
 }
