@@ -1,15 +1,17 @@
 import { render, screen } from '@testing-library/react';
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router-dom';
 
 import SearchBar from '../SearchBar';
 
 describe('The search bar', () => {
+  const hideNav = vi.fn();
+
   it('should be empty initially', () => {
     render(
       <BrowserRouter>
-        <SearchBar />
+        <SearchBar hideNav={hideNav} />
       </BrowserRouter>,
     );
 
@@ -20,7 +22,7 @@ describe('The search bar', () => {
   it('should update value on user input', async () => {
     render(
       <BrowserRouter>
-        <SearchBar />
+        <SearchBar hideNav={hideNav} />
       </BrowserRouter>,
     );
 
@@ -35,7 +37,7 @@ describe('The search bar', () => {
   it('does not submit query when empty', async () => {
     render(
       <BrowserRouter>
-        <SearchBar />
+        <SearchBar hideNav={hideNav} />
       </BrowserRouter>,
     );
 
@@ -52,7 +54,7 @@ describe('The search bar', () => {
   it('displays error message when empty', async () => {
     render(
       <BrowserRouter>
-        <SearchBar />
+        <SearchBar hideNav={hideNav} />
       </BrowserRouter>,
     );
 
@@ -69,7 +71,7 @@ describe('The search bar', () => {
   it('submits query when provided an input', async () => {
     render(
       <BrowserRouter>
-        <SearchBar />
+        <SearchBar hideNav={hideNav} />
       </BrowserRouter>,
     );
 
@@ -91,7 +93,7 @@ describe('The search bar', () => {
   it('submits query when provided an input with one character', async () => {
     render(
       <BrowserRouter>
-        <SearchBar />
+        <SearchBar hideNav={hideNav} />
       </BrowserRouter>,
     );
 
@@ -111,7 +113,7 @@ describe('The search bar', () => {
   it('removes error message when input is successfully submitted', async () => {
     render(
       <BrowserRouter>
-        <SearchBar />
+        <SearchBar hideNav={hideNav} />
       </BrowserRouter>,
     );
 
