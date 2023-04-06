@@ -1,6 +1,8 @@
 @import 'mixins';
 
 .cast-prof {
+  --img-width: 180px;
+
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -11,10 +13,11 @@
     border-radius: 50%;
     aspect-ratio: 1 / 1;
     object-fit: cover;
-    width: 180px;
+    width: var(--img-width);
   }
 
   &__name {
+    max-width: var(--img-width);
     margin-top: 5px;
     font-family: var(--font-gotham-bold);
     font-size: var(--text-sm);
@@ -22,6 +25,8 @@
   }
 
   &__character {
+    padding-inline: 5px;
+    max-width: var(--img-width);
     font-family: var(--font-open-sans);
     text-align: center;
   }
