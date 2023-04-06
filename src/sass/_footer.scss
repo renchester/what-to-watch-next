@@ -3,13 +3,15 @@
 .footer {
   @extend %parent-with-centered-children;
   flex-direction: column;
-  width: 100%;
-  position: fixed;
-  bottom: 0;
-  margin-bottom: 10px;
-  padding: 20px auto;
+  align-items: flex-start;
   gap: 4px;
-  background-color: var(--color-background);
+  width: 100%;
+  bottom: 0;
+
+  margin-top: 80px;
+  padding: 20px auto;
+  background-color: var(--color-grey-dark-2);
+  color: var(--color-light-1);
   font-family: var(--font-raleway);
   z-index: 1;
 
@@ -19,6 +21,7 @@
   }
 
   &__link {
+    text-decoration: none;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -30,9 +33,46 @@
     font-size: var(--text-xxs);
   }
 
-  @media screen and (max-height: 900px) {
-    & {
-      position: relative;
+  &-main {
+    width: 100%;
+    padding-top: 40px;
+    padding-bottom: 20px;
+    padding-left: 10px;
+
+    &__links {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
     }
+
+    &__link {
+      cursor: pointer;
+    }
+  }
+
+  &-attribution {
+    @extend %parent-with-centered-children;
+    flex-direction: row-reverse;
+    gap: 25px;
+    padding-block: 20px;
+    padding-inline: 10px;
+    margin-bottom: 15px;
+
+    &__text {
+      width: 50%;
+      font-size: var(--text-xs);
+      line-height: calc(1rem + 5px);
+      color: var(--color-grey-light-3);
+    }
+  }
+
+  &__tmdb-logo {
+    display: block;
+    width: 90px;
+  }
+
+  &-github {
+    @include center-self(horizontal);
+    padding-bottom: 50px;
   }
 }
