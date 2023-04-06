@@ -1,0 +1,22 @@
+@import 'mixins';
+
+.mv-rec {
+  @include center-self(horizontal);
+  margin-block: 50px;
+  margin-bottom: 200px;
+  width: var(--page-width);
+
+  &__title {
+    text-align: center;
+    font-family: var(--font-gotham);
+    font-size: var(--text-lg);
+    margin-bottom: 35px;
+  }
+
+  &__recommendations {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+}

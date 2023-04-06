@@ -15,7 +15,7 @@ function MovieRecommendations(props: MovieRecommendationsProps) {
       {recommendations.length >= 1 && (
         <>
           <h2 className="mv-rec__title" id="mv-rec__title">
-            If you liked {origMovieTitle}, you might like these...
+            If you liked {origMovieTitle}, you might also like...
           </h2>
           <div className="mv-rec__recommendations">
             {recommendations.map((rec) => (
