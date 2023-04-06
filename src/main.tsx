@@ -20,7 +20,6 @@ import EmptySearch from './components/EmptySearch';
 import SearchResults, { searchLoader } from './components/SearchResults';
 import MovieInfo, { movieInfoLoader } from './components/MovieInfo';
 import WatchlistPage from './pages/WatchlistPage';
-import MovieError from './components/MovieError';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -32,7 +31,7 @@ const router = createBrowserRouter(
           path=":query"
           loader={searchLoader}
           element={<SearchResults />}
-          errorElement={<MovieError />}
+          errorElement={<ErrorPage />}
         />
       </Route>
       <Route path="movie" element={<MoviePage />}>
@@ -40,7 +39,7 @@ const router = createBrowserRouter(
           path=":movieId"
           loader={movieInfoLoader}
           element={<MovieInfo />}
-          errorElement={<MovieError />}
+          errorElement={<ErrorPage />}
         />
       </Route>
       <Route path="watchlist" element={<WatchlistPage />}></Route>
