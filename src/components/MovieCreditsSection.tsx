@@ -20,7 +20,9 @@ function MovieCreditsSection(props: MovieCreditsProps) {
 
   const flickityOptions = {
     groupCells: '30%',
-    initialIndex: 2,
+    initialIndex: 0,
+    cellAlign: 'left',
+    contain: true,
   };
 
   return (
