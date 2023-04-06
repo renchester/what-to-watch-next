@@ -1,0 +1,135 @@
+@import 'mixins';
+
+.wl-page {
+  min-height: 70vh;
+}
+
+.wl-section {
+  @include center-self(horizontal);
+
+  padding-block: 60px;
+  width: var(--page-width);
+
+  &__title {
+    margin-bottom: 15px;
+    text-align: center;
+    font-family: var(--font-gotham);
+  }
+
+  &__subtitle {
+    margin-bottom: 40px;
+    font-family: var(--font-gotham-book);
+    font-size: var(--text-lg);
+    text-align: center;
+  }
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    padding-inline: 10px;
+    justify-content: center;
+    gap: 8px;
+  }
+}
+
+.wl-card {
+  position: relative;
+  display: block;
+  width: clamp(150px, 100%, 220px);
+  margin-right: 22px;
+  padding-bottom: 10px;
+
+  &:hover &__remove-btn,
+  &:focus-within &__remove-btn {
+    display: block;
+  }
+
+  &__link {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      outline: none;
+      box-shadow: 0px 5px 0px 0px var(--color-accent-3);
+      background: var(--color-grey-light-1);
+    }
+  }
+
+  &__img {
+    overflow: hidden;
+    border-radius: 10px;
+    aspect-ratio: 3 / 4.5;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  &__title {
+    text-align: left;
+    margin-top: 10px;
+    margin-bottom: 3px;
+    font-size: var(--text-md);
+    font-family: var(--font-gotham);
+  }
+
+  &__year {
+    font-size: var(--text-sm);
+    font-family: var(--font-gotham-light);
+    margin-bottom: 10px;
+  }
+
+  &__overview {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+
+    line-height: calc(1rem + 2px);
+    font-size: var(--text-xs);
+  }
+
+  &__remove-btn {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 5px;
+    border-radius: 50px;
+    transform: translate(50%, -50%);
+    background: red;
+    color: var(--color-light-1);
+    transition: transform 100ms;
+    cursor: pointer;
+
+    & .material-symbols-outlined {
+      display: block;
+      font-size: var(--text-md);
+      color: inherit;
+    }
+
+    &:hover,
+    &:focus {
+      outline: none;
+      background: var(--color-dark-1);
+      transform: scale(1.2) translate(50%, -50%);
+      transform-origin: top right;
+    }
+  }
+}
+
+.empty-wl {
+  &__title {
+    @extend %empty-title;
+  }
+
+  &__subtitle {
+    @extend %empty-subtitle;
+  }
+
+  &__btn {
+    @extend %empty-button;
+  }
+}
