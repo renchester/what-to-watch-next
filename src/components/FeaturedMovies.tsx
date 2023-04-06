@@ -5,6 +5,7 @@ import Flickity from 'react-flickity-component';
 import { fetchMovies } from '../api/moviesApi';
 import { Movie, MovieCategory } from '../types/types';
 import MovieCard from './MovieCard';
+import Loading from './Loading';
 
 type CategoryInfo = {
   type: MovieCategory;
@@ -64,7 +65,7 @@ function FeaturedMovies(props: { category: MovieCategory }) {
       </h1>
       <p className="rec-mv__subtitle"> {categoryInfo?.subtitle}</p>
 
-      {movies.length >= 1 && (
+      {movies.length >= 1 ? (
         <Flickity
           elementType="section"
           className="rec-mv__movie-container"
@@ -75,6 +76,8 @@ function FeaturedMovies(props: { category: MovieCategory }) {
             <MovieCard movie={mv} key={nanoid()} />
           ))}
         </Flickity>
+      ) : (
+        <Loading message="Fetching movie data..." />
       )}
 
       {isError && (
