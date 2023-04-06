@@ -23,7 +23,7 @@ function MovieDetailsSection(props: MovieDetailsSectionProps) {
   const IMG_URL = import.meta.env.VITE_TMDB_IMG_URL;
   const IMG_SIZE_IDENTIFIER: BackdropSizes = 'w1280';
 
-  const POSTER_SIZE_IDENTIFIER: PosterSizes = 'w500';
+  const POSTER_SIZE_IDENTIFIER: PosterSizes = 'w780';
 
   useEffect(() => {
     if (movieId && watchlistState.includes(parseInt(movieId))) {
