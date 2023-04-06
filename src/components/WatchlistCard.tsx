@@ -5,6 +5,8 @@ import { fetchMovieDetails } from '../api/moviesApi';
 import { useWatchlist } from '../context/WatchlistContext';
 import { PosterSizes, MovieDetailsType } from '../types/types';
 
+import placeholder from '../assets/img/placeholder-portrait.png';
+
 type WatchlistCardProps = {
   movieId: number;
 };
@@ -40,7 +42,7 @@ function WatchlistCard(props: WatchlistCardProps) {
   const IMG_SIZE_IDENTIFIER: PosterSizes = 'w342';
   const imageSource = movie.poster_path
     ? `${IMG_URL}/${IMG_SIZE_IDENTIFIER}/${movie.poster_path}`
-    : '';
+    : placeholder;
 
   const removeFromWatchList = () => {
     dispatch({ type: 'remove_from_list', payload: movieId });
@@ -55,6 +57,7 @@ function WatchlistCard(props: WatchlistCardProps) {
         <img
           src={imageSource}
           alt={`Poster for ${movie.title || 'this movie'}`}
+          className="wl-card__img"
         />
         {movie.title && <h2 className="wl-card__title">{movie.title}</h2>}
         {movie.overview && (
@@ -67,7 +70,9 @@ function WatchlistCard(props: WatchlistCardProps) {
         onClick={removeFromWatchList}
         aria-label="Remove from watchlist"
       >
-        Delete
+        <span className="material-symbols-outlined" aria-hidden="true">
+          close
+        </span>
       </button>
     </article>
   );

@@ -14,8 +14,9 @@ function WatchlistSection(props: WatchlistSectionProps) {
   return (
     <section className="wl-section" aria-label={`Watchlist section`}>
       <h1 className="wl-section__title" aria-label="watchlist title">
-        All your movies
+        Your watchlist
       </h1>
+      <h2 className="wl-section__subtitle">All your movies in one place</h2>
 
       <ul className="wl-section__list">
         <Suspense fallback={<Loading message="Fetching watchlist details" />}>
