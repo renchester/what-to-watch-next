@@ -27,6 +27,11 @@
     padding-inline: 60px;
     padding-top: 100px;
     padding-bottom: 50px;
+
+    @include breakpoint(lg) {
+      padding-inline: 20px;
+      padding-bottom: 20px;
+    }
   }
 
   &__title {
@@ -51,6 +56,10 @@
     font-style: italic;
     font-family: var(--font-montserrat);
     font-size: var(--text-md);
+
+    @include breakpoint(md) {
+      display: none;
+    }
   }
 
   &__wl-btn {
@@ -80,15 +89,38 @@
     gap: 20px;
     padding-block: 50px;
     padding-inline: 10px;
+
+    @include breakpoint(lg) {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      grid-template-areas: 'img overview' 'img info';
+    }
+
+    @include breakpoint(sm) {
+      display: flex;
+      flex-direction: column;
+    }
   }
 
   &__poster {
     width: clamp(120px, 30%, 270px);
     height: auto;
+
+    @include breakpoint(lg) {
+      grid-area: img;
+      width: 100%;
+    }
   }
 
   &__overview--wrapper {
     width: 35%;
+
+    @include breakpoint(lg) {
+      grid-area: overview;
+      width: 100%;
+      padding-inline: 10px;
+    }
   }
 
   &__overview-title,
@@ -133,6 +165,11 @@
     background: var(--color-grey-dark-2);
     color: var(--color-light-1);
     padding: 15px;
+
+    @include breakpoint(lg) {
+      grid-area: info;
+      width: 100%;
+    }
   }
 
   &__info--wrapper {

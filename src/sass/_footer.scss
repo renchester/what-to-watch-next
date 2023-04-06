@@ -3,14 +3,15 @@
 .footer {
   @extend %parent-with-centered-children;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   gap: 4px;
   width: 100%;
   bottom: 0;
 
   margin-top: 80px;
   padding: 20px auto;
-  background-color: var(--color-grey-dark-2);
+  // background-color: var(--color-grey-dark-2);
+  background: linear-gradient(to top, rgb(6, 64, 75), black);
   color: var(--color-light-1);
   font-family: var(--font-raleway);
   z-index: 1;
@@ -54,9 +55,9 @@
     @extend %parent-with-centered-children;
     flex-direction: row-reverse;
     gap: 25px;
-    padding-block: 20px;
+    padding-block: 30px;
     padding-inline: 10px;
-    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 
     &__text {
       width: 50%;
@@ -72,7 +73,6 @@
   }
 
   &-github {
-    @include center-self(horizontal);
-    padding-bottom: 50px;
+    padding-block: 30px;
   }
 }

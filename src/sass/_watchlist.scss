@@ -1,7 +1,7 @@
 @import 'mixins';
 
 .wl-page {
-  min-height: 70vh;
+  min-height: 60vh;
 }
 
 .wl-section {
@@ -14,6 +14,10 @@
     margin-bottom: 15px;
     text-align: center;
     font-family: var(--font-gotham);
+
+    @include breakpoint(md) {
+      font-size: var(--text-xl);
+    }
   }
 
   &__subtitle {
@@ -21,6 +25,10 @@
     font-family: var(--font-gotham-book);
     font-size: var(--text-lg);
     text-align: center;
+
+    @include breakpoint(md) {
+      font-size: var(--text-md);
+    }
   }
 
   &__list {
@@ -36,12 +44,16 @@
   position: relative;
   display: block;
   width: clamp(150px, 100%, 220px);
-  margin-right: 22px;
+  margin-inline: 12px;
   padding-bottom: 10px;
 
   &:hover &__remove-btn,
   &:focus-within &__remove-btn {
     display: block;
+  }
+
+  @include breakpoint(sm) {
+    width: 160px;
   }
 
   &__link {
@@ -92,29 +104,30 @@
   }
 
   &__remove-btn {
-    display: none;
     position: absolute;
     top: 0;
     right: 0;
     padding: 5px;
     border-radius: 50px;
     transform: translate(50%, -50%);
-    background: red;
+    background: black;
     color: var(--color-light-1);
     transition: transform 100ms;
     cursor: pointer;
+    opacity: 0.65;
 
     & .material-symbols-outlined {
       display: block;
-      font-size: var(--text-md);
+      font-size: var(--text-sm);
       color: inherit;
     }
 
     &:hover,
     &:focus {
+      opacity: 1;
       outline: none;
-      background: var(--color-dark-1);
-      transform: scale(1.2) translate(50%, -50%);
+      background: var(--color-accent-1);
+      transform: scale(1.05) translate(50%, -50%);
       transform-origin: top right;
     }
   }
