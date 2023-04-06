@@ -94,8 +94,8 @@
 
     &:focus-within,
     &:hover {
-      border-top-right-radius: 10px;
-      border-bottom-right-radius: 10px;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
       border-left: 2px solid var(--color-light-1);
       background: var(--color-grey-dark-2);
       outline: none;
