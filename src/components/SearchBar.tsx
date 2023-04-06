@@ -1,7 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function SearchBar() {
+type SearchBarProps = {
+  hideNav: () => void;
+};
+
+function SearchBar(props: SearchBarProps) {
+  const { hideNav } = props;
+
   const navigate = useNavigate();
   const [query, setQuery] = useState('');
   const [isError, setIsError] = useState(false);
@@ -21,6 +27,7 @@ function SearchBar() {
     const newQuery = new FormData(e.currentTarget).get('search') as string;
 
     navigate(`/search/${newQuery.trim()}`);
+    hideNav();
   };
 
   useEffect(() => {
