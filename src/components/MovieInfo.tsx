@@ -44,6 +44,12 @@ function MovieInfo() {
     setTargetMovie(() => movieDetails);
   }, [movieId]);
 
+  useEffect(() => {
+    document.title = `${
+      targetMovie.title || 'Movie Page'
+    } - What to Watch Next`;
+  }, [targetMovie]);
+
   return (
     <>
       <MovieDetailsSection movie={targetMovie} />

@@ -1,7 +1,13 @@
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import ScrollToTop from '../components/ScrollToTop';
 
 function ErrorPage() {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = '404 Error - What to Watch Next';
+  }, []);
 
   const goBackToPrevPage = () => {
     navigate(-1);
@@ -13,8 +19,11 @@ function ErrorPage() {
 
   return (
     <main className="error">
-      <h1 className="error__title">404 - Error</h1>
-      <h2 className="error__subtitle">There is nothing in here</h2>
+      <h3 className="error__404">404 - Error</h3>
+      <h1 className="error__title">There is nothing here</h1>
+      <h2 className="error__subtitle">
+        Perhaps you were looking for something else
+      </h2>
 
       <div className="error__btn-container">
         <button type="button" className="error__btn" onClick={goBackToPrevPage}>
@@ -24,6 +33,7 @@ function ErrorPage() {
           Homepage
         </button>
       </div>
+      <ScrollToTop />
     </main>
   );
 }

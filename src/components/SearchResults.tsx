@@ -1,5 +1,4 @@
-import { nanoid } from 'nanoid';
-import { Suspense } from 'react';
+import { Suspense, useEffect } from 'react';
 import {
   LoaderFunctionArgs,
   useLoaderData,
@@ -7,6 +6,7 @@ import {
   defer,
   useParams,
 } from 'react-router-dom';
+import { nanoid } from 'nanoid';
 
 import MovieCard from './MovieCard';
 import Loading from './Loading';
@@ -25,6 +25,12 @@ export const searchLoader = ({ params }: LoaderFunctionArgs) => {
 function SearchResults() {
   const { query } = useParams();
   const { resultsPromise } = useLoaderData() as { resultsPromise: Movie[] };
+
+  useEffect(() => {
+    const title = query ? `for ${query}` : '';
+
+    document.title = `Search results ${title} - What to Watch Next`;
+  }, [query]);
 
   const renderResults = (searchResults: Movie[]) => (
     <>
