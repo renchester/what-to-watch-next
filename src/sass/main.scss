@@ -13,6 +13,9 @@
 
 @use 'loading';
 
-@use 'movie-credits';
-@use 'cast-profile';
 @use 'movie-details';
+@use 'movie-credits';
+@use 'movie-recommendations';
+@use 'cast-profile';
+
+@use 'watchlist';
