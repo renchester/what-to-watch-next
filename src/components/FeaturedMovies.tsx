@@ -59,8 +59,8 @@ function FeaturedMovies(props: { category: MovieCategory }) {
   };
 
   return (
-    <section className="rec-mv" aria-labelledby="rec-mv__title">
-      <h1 className="rec-mv__title" id="rec-mv__title">
+    <section className="rec-mv" aria-labelledby={`rec-mv__title-${category}`}>
+      <h1 className="rec-mv__title" id={`rec-mv__title-${category}`}>
         {categoryInfo?.title}
       </h1>
       <p className="rec-mv__subtitle"> {categoryInfo?.subtitle}</p>

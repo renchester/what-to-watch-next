@@ -73,15 +73,19 @@ function MovieDetailsSection(props: MovieDetailsSectionProps) {
           </h1>
 
           {movie.release_date && (
-            <h2 className="mv-dtl__year" aria-label="release year">
+            <h2
+              className="mv-dtl__year"
+              aria-label="movie release year and rating"
+            >
               {getYear(new Date(movie.release_date))}
+              {!!movie.vote_average && ` • ${movie.vote_average.toFixed(1)}/10`}
             </h2>
           )}
 
           {movie.tagline && (
-            <h2 className="mv-dtl__tagline" aria-label="movie tagline">
+            <h3 className="mv-dtl__tagline" aria-label="movie tagline">
               {movie.tagline}
-            </h2>
+            </h3>
           )}
 
           {inWatchlist ? (
