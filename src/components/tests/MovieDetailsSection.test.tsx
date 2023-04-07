@@ -32,7 +32,7 @@ const emptyMovieDetails: MovieDetailsType = {
   release_date: '',
   revenue: 0,
   runtime: 0,
-  spoken_languages: [{ iso_639_1: '', name: 'english' }],
+  spoken_languages: [],
   status: 'Released',
   tagline: '',
   title: '',
@@ -71,13 +71,13 @@ describe('The <MovieDetailsSection> component ', () => {
       screen.getByRole('heading', { level: 1, name: /movie title/i }),
     ).toBeInTheDocument();
     expect(
-      screen.getByRole('heading', { level: 3, name: /movie rating/i }),
+      screen.getByRole('heading', {
+        level: 2,
+        name: /movie release year and rating/i,
+      }),
     ).toBeInTheDocument();
     expect(
-      screen.getByRole('heading', { level: 3, name: /movie runtime/i }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole('heading', { level: 2, name: /movie tagline/i }),
+      screen.getByRole('heading', { level: 3, name: /movie tagline/i }),
     ).toBeInTheDocument();
     expect(screen.getByText(/fake overview/i)).toBeInTheDocument();
 
@@ -102,18 +102,113 @@ describe('The <MovieDetailsSection> component ', () => {
       screen.queryByRole('heading', { level: 1, name: /movie title/i }),
     ).toBeEmptyDOMElement();
     expect(
-      screen.queryByRole('heading', { level: 3, name: /movie rating/i }),
+      screen.queryByRole('heading', {
+        name: /movie release year and rating/i,
+      }),
     ).not.toBeInTheDocument();
     expect(
-      screen.queryByRole('heading', { level: 3, name: /movie runtime/i }),
-    ).not.toBeInTheDocument();
-    expect(
-      screen.queryByRole('heading', { level: 2, name: /movie tagline/i }),
+      screen.queryByRole('heading', { name: /movie tagline/i }),
     ).not.toBeInTheDocument();
     expect(screen.queryByText(/fake overview/i)).not.toBeInTheDocument();
 
     expect(screen.queryByRole('listitem')).not.toBeInTheDocument();
     expect(screen.queryByAltText(/backdrop image/i)).not.toBeInTheDocument();
+  });
+});
+
+describe('The other info section', () => {
+  it('renders elements when supplied data', () => {
+    const mockMovieDetails = {
+      ...emptyMovieDetails,
+      runtime: 200,
+      budget: 300,
+      revenue: 500,
+      release_date: '2010-09-09',
+      spoken_languages: [{ name: 'English' }, { name: 'Francais' }],
+      homepage: 'https://hello-hello-hello.org',
+    };
+
+    render(
+      <BrowserRouter>
+        <WatchlistProvider>
+          <MovieDetailsSection movie={mockMovieDetails} />
+        </WatchlistProvider>
+      </BrowserRouter>,
+    );
+
+    expect(
+      screen.getByRole('heading', { level: 4, name: /runtime/i }),
+    ).toBeInTheDocument();
+    expect(screen.getByText('200 min')).toBeInTheDocument();
+
+    expect(
+      screen.getByRole('heading', { level: 4, name: /budget/i }),
+    ).toBeInTheDocument();
+    expect(screen.getByText('$300.00')).toBeInTheDocument();
+
+    expect(
+      screen.getByRole('heading', { level: 4, name: /revenue/i }),
+    ).toBeInTheDocument();
+    expect(screen.getByText('$500.00')).toBeInTheDocument();
+
+    expect(
+      screen.getByRole('heading', { level: 4, name: /release date/i }),
+    ).toBeInTheDocument();
+    expect(screen.getByText('September 09 2010')).toBeInTheDocument();
+
+    expect(
+      screen.getByRole('heading', { level: 4, name: /languages/i }),
+    ).toBeInTheDocument();
+    expect(screen.getByText('English Francais')).toBeInTheDocument();
+
+    expect(
+      screen.getByRole('heading', { level: 4, name: /Website/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText('https://hello-hello-hello.org'),
+    ).toBeInTheDocument();
+  });
+
+  it('does not render elements when data is not supplied', () => {
+    render(
+      <BrowserRouter>
+        <WatchlistProvider>
+          <MovieDetailsSection movie={emptyMovieDetails} />
+        </WatchlistProvider>
+      </BrowserRouter>,
+    );
+
+    expect(
+      screen.queryByRole('heading', { level: 4, name: /runtime/i }),
+    ).not.toBeInTheDocument();
+    expect(screen.queryByText('200 min')).not.toBeInTheDocument();
+
+    expect(
+      screen.queryByRole('heading', { level: 4, name: /budget/i }),
+    ).not.toBeInTheDocument();
+    expect(screen.queryByText('$300.00')).not.toBeInTheDocument();
+
+    expect(
+      screen.queryByRole('heading', { level: 4, name: /revenue/i }),
+    ).not.toBeInTheDocument();
+    expect(screen.queryByText('$500.00')).not.toBeInTheDocument();
+
+    expect(
+      screen.queryByRole('heading', { level: 4, name: /release date/i }),
+    ).not.toBeInTheDocument();
+    expect(screen.queryByText('September 09 2010')).not.toBeInTheDocument();
+
+    expect(
+      screen.queryByRole('heading', { level: 4, name: /languages/i }),
+    ).not.toBeInTheDocument();
+    expect(screen.queryByText('English Francais')).not.toBeInTheDocument();
+
+    expect(
+      screen.queryByRole('heading', { level: 4, name: /Website/i }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByText('https://hello-hello-hello.org'),
+    ).not.toBeInTheDocument();
   });
 });
 

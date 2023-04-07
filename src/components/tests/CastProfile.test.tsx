@@ -41,6 +41,12 @@ describe('The <CastProfile> component', () => {
       </BrowserRouter>,
     );
 
-    expect(screen.queryByRole('img')).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole('img', { name: /profile for john doe/i }),
+    ).not.toBeInTheDocument();
+
+    expect(
+      screen.getByRole('img', { name: /empty profile/i }),
+    ).toBeInTheDocument();
   });
 });

@@ -16,4 +16,27 @@ describe('The <Header> component', () => {
       screen.getByRole('heading', { name: /what to watch next/i }),
     ).toBeInTheDocument();
   });
+
+  it('renders the searchbar', () => {
+    render(
+      <BrowserRouter>
+        <Header />
+      </BrowserRouter>,
+    );
+
+    expect(screen.getByRole('search')).toBeInTheDocument();
+    expect(screen.getByRole('searchbox')).toBeInTheDocument();
+  });
+
+  it('renders the watchlist icon', () => {
+    render(
+      <BrowserRouter>
+        <Header />
+      </BrowserRouter>,
+    );
+
+    expect(
+      screen.getByRole('link', { name: /your watchlist/i }),
+    ).toBeInTheDocument();
+  });
 });

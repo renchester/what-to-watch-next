@@ -45,7 +45,7 @@ describe('The <MovieRecommendations> component', () => {
       }),
     ).toBeInTheDocument();
     expect(
-      screen.getByText('If you liked original movie, you might like these...'),
+      screen.getByText('If you liked original movie, you might also like...'),
     ).toBeInTheDocument();
     expect(screen.getByRole('region')).toBeInTheDocument();
   });

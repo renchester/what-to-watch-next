@@ -72,11 +72,13 @@ describe('The <FeaturedMovies> component', () => {
       {
         title: 'Fake Movie 1',
         overview: 'Fake Overview 1',
+        vote_average: 5,
         release_date: '2010-11-10',
       },
       {
         title: 'Fake Movie 2',
         overview: 'Fake Overview 2',
+        vote_average: 5,
         release_date: '2012-11-10',
       },
     ];
@@ -100,12 +102,16 @@ describe('The <FeaturedMovies> component', () => {
       ).toHaveLength(2);
 
       expect(
-        screen.getAllByRole('heading', { name: 'movie release year' }),
+        screen.getAllByRole('heading', {
+          name: 'movie release year and rating',
+        }),
       ).toHaveLength(2);
 
       expect(screen.getByText(/fake movie 1/i)).toBeInTheDocument();
 
       expect(screen.getByText(/fake overview 1/i)).toBeInTheDocument();
+
+      expect(screen.getByText(/2010 • 5/i)).toBeInTheDocument();
     });
   });
 

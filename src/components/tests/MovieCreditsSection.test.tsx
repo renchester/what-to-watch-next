@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 import { BrowserRouter } from 'react-router-dom';
 import MovieCreditsSection from '../MovieCreditsSection';
@@ -10,7 +10,7 @@ describe('The <MovieCreditsSection> component', () => {
     crew: [],
   };
 
-  it('renders elements correctly', () => {
+  it('renders elements correctly', async () => {
     const mockCredits = {
       ...emptyCredits,
       cast: [{ name: 'John Doe', character: 'William' }],
@@ -32,7 +32,10 @@ describe('The <MovieCreditsSection> component', () => {
     ).toBeInTheDocument();
 
     expect(screen.getAllByRole('list')).toHaveLength(2);
-    expect(screen.getAllByRole('listitem')).toHaveLength(2);
+
+    await waitFor(() =>
+      expect(screen.getAllByRole('listitem')).toHaveLength(2),
+    );
   });
 
   it('does not render cast members when data is not supplied', () => {
