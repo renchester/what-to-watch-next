@@ -20,8 +20,8 @@ function WatchlistSection(props: WatchlistSectionProps) {
       <ul className="wl-section__list">
         <Suspense fallback={<Loading message="Fetching watchlist details" />}>
           {list.length >= 1 &&
-            list.map((id, index) => (
-              <WatchlistCard movieId={id} key={`${id}--watchlist-${index}`} />
+            list.map((id) => (
+              <WatchlistCard movieId={id} key={`${id}--watchlist-item`} />
             ))}
         </Suspense>
       </ul>

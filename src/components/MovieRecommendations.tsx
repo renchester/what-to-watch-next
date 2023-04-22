@@ -17,10 +17,10 @@ function MovieRecommendations(props: MovieRecommendationsProps) {
             If you liked {origMovieTitle}, you might also like...
           </h2>
           <div className="mv-rec__recommendations">
-            {recommendations.map((rec, index) => (
+            {recommendations.map((rec) => (
               <MovieCard
                 movie={rec}
-                key={`${rec.id}--movie-recommendation-${index}`}
+                key={`${rec.id}--movie-recommendation-${rec.title || 'title'}`}
               />
             ))}
           </div>

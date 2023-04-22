@@ -37,8 +37,11 @@ function SearchResults() {
         Results for {query}
       </h1>
       <div className="search-results__container">
-        {searchResults.map((res, index) => (
-          <MovieCard movie={res} key={`${res.id}--search-result-${index}`} />
+        {searchResults.map((res) => (
+          <MovieCard
+            movie={res}
+            key={`${res.id}--search-result-${res.title || 'title'}`}
+          />
         ))}
       </div>
     </>
