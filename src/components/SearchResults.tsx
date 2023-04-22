@@ -6,7 +6,6 @@ import {
   defer,
   useParams,
 } from 'react-router-dom';
-import { nanoid } from 'nanoid';
 
 import MovieCard from './MovieCard';
 import Loading from './Loading';
@@ -38,8 +37,8 @@ function SearchResults() {
         Results for {query}
       </h1>
       <div className="search-results__container">
-        {searchResults.map((res) => (
-          <MovieCard movie={res} key={nanoid()} />
+        {searchResults.map((res, index) => (
+          <MovieCard movie={res} key={`${res.id}--search-result-${index}`} />
         ))}
       </div>
     </>

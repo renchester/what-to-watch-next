@@ -1,4 +1,3 @@
-import { nanoid } from 'nanoid';
 import { Movie } from '../types/types';
 import MovieCard from './MovieCard';
 
@@ -18,8 +17,11 @@ function MovieRecommendations(props: MovieRecommendationsProps) {
             If you liked {origMovieTitle}, you might also like...
           </h2>
           <div className="mv-rec__recommendations">
-            {recommendations.map((rec) => (
-              <MovieCard movie={rec} key={nanoid()} />
+            {recommendations.map((rec, index) => (
+              <MovieCard
+                movie={rec}
+                key={`${rec.id}--movie-recommendation-${index}`}
+              />
             ))}
           </div>
         </>

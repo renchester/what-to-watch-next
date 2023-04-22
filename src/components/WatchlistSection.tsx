@@ -1,5 +1,4 @@
 import { Suspense } from 'react';
-import { nanoid } from 'nanoid';
 import { Watchlist } from '../types/types';
 import WatchlistCard from './WatchlistCard';
 import Loading from './Loading';
@@ -21,7 +20,9 @@ function WatchlistSection(props: WatchlistSectionProps) {
       <ul className="wl-section__list">
         <Suspense fallback={<Loading message="Fetching watchlist details" />}>
           {list.length >= 1 &&
-            list.map((id) => <WatchlistCard movieId={id} key={nanoid()} />)}
+            list.map((id, index) => (
+              <WatchlistCard movieId={id} key={`${id}--watchlist-${index}`} />
+            ))}
         </Suspense>
       </ul>
     </section>

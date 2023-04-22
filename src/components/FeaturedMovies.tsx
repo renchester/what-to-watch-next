@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { nanoid } from 'nanoid';
 import Flickity from 'react-flickity-component';
 
 import { fetchMovies } from '../api/moviesApi';
@@ -73,7 +72,7 @@ function FeaturedMovies(props: { category: MovieCategory }) {
           reloadOnUpdate
         >
           {movies.map((mv) => (
-            <MovieCard movie={mv} key={nanoid()} />
+            <MovieCard movie={mv} key={`${mv.id}--featured-${category}`} />
           ))}
         </Flickity>
       ) : (

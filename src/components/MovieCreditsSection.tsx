@@ -1,4 +1,3 @@
-import { nanoid } from 'nanoid';
 import Flickity from 'react-flickity-component';
 
 import { MovieCredits } from '../types/types';
@@ -41,11 +40,13 @@ function MovieCreditsSection(props: MovieCreditsProps) {
             elementType="ul"
             options={flickityOptions}
           >
-            {movieCast.map((castMember) => (
+            {movieCast.map((castMember, index) => (
               <CastProfile
                 type="cast"
                 profile={castMember}
-                key={castMember.cast_id || nanoid()}
+                key={`${castMember.cast_id || index}--cast-profile-${index}-${
+                  castMember.credit_id || ''
+                }`}
               />
             ))}
           </Flickity>
@@ -66,11 +67,13 @@ function MovieCreditsSection(props: MovieCreditsProps) {
             elementType="ul"
             options={flickityOptions}
           >
-            {movieCrew.map((crewMember) => (
+            {movieCrew.map((crewMember, index) => (
               <CastProfile
                 type="crew"
                 profile={crewMember}
-                key={crewMember.credit_id || nanoid()}
+                key={`${crewMember.credit_id || index}--cast-profile-${index}-${
+                  crewMember.job || ''
+                }`}
               />
             ))}
           </Flickity>
